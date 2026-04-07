@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>鼎诚别墅设计 · 需求收集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 小程序顶部导航 */
+        .mini-header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            padding: 50px 20px 25px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .brand-logo span {
+            color: #d4a853;
+        }
+
+        .mini-header p {
+            font-size: 12px;
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+
+        /* 表单容器 */
+        .form-container {
+            max-width: 100%;
+            padding: 15px;
+            padding-bottom: 100px;
+        }
+
+        /* 封面区域 */
+        .cover-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-radius: 16px;
+            padding: 35px 20px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-section::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(212,168,83,0.1) 0%, transparent 70%);
+        }
+
+        .cover-badge {
+            display: inline-block;
+            background: rgba(212,168,83,0.2);
+            border: 1px solid rgba(212,168,83,0.4);
+            color: #d4a853;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .cover-section h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .cover-section p {
+            font-size: 13px;
+            opacity: 0.8;
+            position: relative;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .card-header {
+            padding: 16px;
+            border-bottom: 1px solid #f2f2f2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-header .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .card-header h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .card-body {
+            padding: 16px;
+        }
+
+        /* 输入框样式 */
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .input-group label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 7px;
+            font-weight: 500;
+        }
+
+        .required-mark {
+            color: #e74c3c;
+            font-size: 12px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: #fafafa;
+            font-family: inherit;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #d4a853;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(212,168,83,0.1);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* 多选框样式 */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 14px;
+            background: #f6f6f8;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1.5px solid transparent;
+            font-size: 13px;
+            color: #444;
+            user-select: none;
+        }
+
+        .checkbox-item:hover {
+            background: #f0f0f2;
+        }
+
+        .checkbox-item.selected {
+            background: #1a1a2e;
+            color: #fff;
+            border-color: #1a1a2e;
+        }
+
+        .checkbox-item input {
+            display: none;
+        }
+
+        .checkbox-item .check-icon {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item.selected .check-icon {
+            background: #d4a853;
+            border-color: #d4a853;
+        }
+
+        .checkbox-item.selected .check-icon::after {
+            content: "✓";
+            font-size: 9px;
+            font-weight: bold;
+            color: #1a1a2e;
+        }
+
+        /* 风格图片网格 */
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .style-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            background: #f0f0f0;
+        }
+
+        .style-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .style-card.selected {
+            border-color: #d4a853;
+            box-shadow: 0 0 0 1px #d4a853, 0 6px 20px rgba(212,168,83,0.3);
+        }
+
+        .style-card img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .style-card.selected img {
+            filter: brightness(0.85);
+        }
+
+        .style-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.75));
+            color: #fff;
+            padding: 10px 10px 8px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .style-card .badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: #d4a853;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a2e;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .style-card.selected .badge {
+            display: flex;
+        }
+
+        /* 参考图区域 */
+        .reference-section {
+            margin-top: 16px;
+        }
+
+        .reference-section label {
+            display: block;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .reference-imgs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .reference-imgs img {
+            width: 100%;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .reference-imgs img:hover {
+            border-color: #d4a853;
+        }
+
+        .reference-imgs img.selected {
+            border-color: #d4a853;
+            box-shadow: 0 0 12px rgba(212,168,83,0.4);
+        }
+
+        .hint {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 上传区域 */
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 12px;
+        }
+
+        .upload-area:hover {
+            border-color: #d4a853;
+            background: #fdf8ee;
+        }
+
+        .upload-area .icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .upload-area p {
+            font-size: 13px;
+            color: #999;
+        }
+
+        /* 面积滑块 */
+        .range-slider {
+            margin-top: 8px;
+        }
+
+        .range-value {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+
+        .range-value span {
+            font-size: 14px;
+            color: #999;
+            font-weight: normal;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, #d4a853, #1a1a2e);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #d4a853;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(212,168,83,0.5);
+            border: 3px solid #fff;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 11px;
+            color: #bbb;
+        }
+
+        /* 预算选项 */
+        .budget-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .budget-item {
+            padding: 14px 10px;
+            text-align: center;
+            border-radius: 12px;
+            border: 2px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .budget-item:hover {
+            border-color: #d4a853;
+        }
+
+        .budget-item.selected {
+            border-color: #d4a853;
+            background: linear-gradient(135deg, rgba(212,168,83,0.08), rgba(26,26,46,0.05));
+        }
+
+        .budget-item .amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .budget-item.selected .amount {
+            color: #d4a853;
+        }
+
+        .budget-item .label {
+            font-size: 11px;
+            color: #999;
+            margin-top: 3px;
+        }
+
+        /* 优先级 */
+        .priority-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .priority-tag {
+            flex: 1;
+            padding: 9px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1.5px solid #e8e8e8;
+            font-weight: 500;
+        }
+
+        .priority-tag:hover {
+            border-color: #d4a853;
+        }
+
+        .priority-tag.selected {
+            background: #1a1a2e;
+            color: #fff;
+            border-color: #1a1a2e;
+        }
+
+        /* 提交按钮 */
+        .submit-btn {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            background: #fff;
+            border-top: 1px solid #f0f0f0;
+            z-index: 100;
+        }
+
+        .submit-btn button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(26,26,46,0.35);
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn button:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn button:hover {
+            box-shadow: 0 6px 25px rgba(26,26,46,0.5);
+        }
+
+        /* 进度指示 */
+        .progress-bar {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 15px;
+            background: #fff;
+            position: sticky;
+            top: 80px;
+            z-index: 99;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .progress-dot.active {
+            background: #d4a853;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .progress-dot.completed {
+            background: #1a1a2e;
+        }
+
+        /* 文字区域 */
+        textarea {
+            resize: none;
+            min-height: 90px;
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.05s; }
+        .card:nth-child(2) { animation-delay: 0.12s; }
+        .card:nth-child(3) { animation-delay: 0.19s; }
+        .card:nth-child(4) { animation-delay: 0.26s; }
+        .card:nth-child(5) { animation-delay: 0.33s; }
+        .card:nth-child(6) { animation-delay: 0.40s; }
+
+        /* 品牌水印 */
+        .brand-footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        .brand-footer strong {
+            color: #d4a853;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- 小程序顶部 -->
+    <div class="mini-header">
+        <div class="brand-logo"><span>DC</span> 鼎诚别墅设计</div>
+        <p>全案设计 · 施工落地</p>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="progress-bar">
+        <div class="progress-dot completed"></div>
+        <div class="progress-dot active"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+    </div>
+
+    <div class="form-container">
+        <!-- 封面 -->
+        <div class="cover-section">
+            <div class="cover-badge">✨ 专属定制</div>
+            <h2>开启您的别墅设计之旅</h2>
+            <p>请根据实际情况填写以下信息，我们将为您量身定制设计方案</p>
+        </div>
+
+        <!-- 第一部分：基础信息 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: #d4a853;">📋</div>
+                <h3>一、基本信息</h3>
+            </div>
+            <div class="card-body">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>您的姓名 <span class="required-mark">*</span></label>
+                        <input type="text" placeholder="请输入姓名" id="name">
+                    </div>
+                    <div class="input-group">
+                        <label>联系电话 <span class="required-mark">*</span></label>
+                        <input type="tel" placeholder="请输入手机号" id="phone">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>别墅位置 / 小区名称</label>
+                    <input type="text" placeholder="请输入小区或楼盘名称">
+                </div>
+                <div class="input-group">
+                    <label>微信号（选填）</label>
+                    <input type="text" placeholder="方便我们及时联系您">
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二部分：房屋情况 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #d4a853, #c4943f); color: #fff;">🏡</div>
+                <h3>二、房屋情况</h3>
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <label>别墅类型</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="houseType" value="独栋">
+                            <span class="check-icon"></span>
+                            独栋别墅
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="houseType" value="联排">
+                            <span class="check-icon"></span>
+                            联排别墅
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="houseType" value="双拼">
+                            <span class="check-icon"></span>
+                            双拼别墅
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="houseType" value="叠拼">
+                            <span class="check-icon"></span>
+                            叠拼别墅
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="houseType" value="合院">
+                            <span class="check-icon"></span>
+                            合院别墅
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>建筑面积（平方米）</label>
+                    <div class="range-slider">
+                        <div class="range-value"><span id="areaValue">300</span> <span>㎡</span></div>
+                        <input type="range" min="150" max="1000" value="300" step="10" oninput="document.getElementById('areaValue').textContent = this.value">
+                        <div class="range-labels">
+                            <span>150㎡</span>
+                            <span>300㎡</span>
+                            <span>500㎡</span>
+                            <span>800㎡</span>
+                            <span>1000㎡+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>楼层数量</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="floor" value="1">
+                            <span class="check-icon"></span>
+                            单层
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="floor" value="2">
+                            <span class="check-icon"></span>
+                            两层
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="floor" value="3">
+                            <span class="check-icon"></span>
+                            三层
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="floor" value="4+">
+                            <span class="check-icon"></span>
+                            四层及以上
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>地下室</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basement" value="无">
+                            <span class="check-icon"></span>
+                            无地下室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basement" value="半">
+                            <span class="check-icon"></span>
+                            半地下室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basement" value="全">
+                            <span class="check-icon"></span>
+                            全地下室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basement" value="下沉">
+                            <span class="check-icon"></span>
+                            下沉庭院
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>庭院/花园面积（选填）</label>
+                    <input type="text" placeholder="如：约200㎡" style="background: #fff;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三部分：设计风格 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: #fff;">🎨</div>
+                <h3>三、设计风格偏好</h3>
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <label>您喜欢的风格（可多选）</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="奶油风">
+                            <span class="check-icon"></span>
+                            🍰 奶油风
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="极简风">
+                            <span class="check-icon"></span>
+                            ⚪ 极简风
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="北欧风">
+                            <span class="check-icon"></span>
+                            🌿 北欧风
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="轻奢风">
+                            <span class="check-icon"></span>
+                            ✨ 轻奢风
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="法式风">
+                            <span class="check-icon"></span>
+                            🏛️ 法式风
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="侘寂风">
+                            <span class="check-icon"></span>
+                            🎋 侘寂风
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="现代风">
+                            <span class="check-icon"></span>
+                            🔲 现代风
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="新中式">
+                            <span class="check-icon"></span>
+                            🏮 新中式
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="日式">
+                            <span class="check-icon"></span>
+                            🏯 日式
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="美式">
+                            <span class="check-icon"></span>
+                            🌾 美式乡村
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="工业风">
+                            <span class="check-icon"></span>
+                            🏭 工业风
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="意式">
+                            <span class="check-icon"></span>
+                            🇮🇹 意式风格
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="style" value="混搭">
+                            <span class="check-icon"></span>
+                            🎨 混搭风格
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>补充说明或参考（选填）</label>
+                    <textarea placeholder="可以描述您喜欢的颜色、材质、氛围，或上传参考图片..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>上传参考图片（选填）</label>
+                    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                        <div class="icon">📷</div>
+                        <p>点击上传图片</p>
+                        <input type="file" id="fileInput" accept="image/*" multiple style="display:none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第四部分：空间功能 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff;">🛋️</div>
+                <h3>四、空间功能需求</h3>
+            </div>
+            <div class="card-body">
+                <!-- 一层公区 -->
+                <div class="input-group">
+                    <label>🏠 一层（公区）</label>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px;">
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="客厅">
+                            <span class="check-icon"></span>
+                            客厅
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="横厅">
+                            <span class="check-icon"></span>
+                            横厅
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="茶室">
+                            <span class="check-icon"></span>
+                            茶室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="中厨">
+                            <span class="check-icon"></span>
+                            中厨
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="西厨">
+                            <span class="check-icon"></span>
+                            西厨
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="中西厨">
+                            <span class="check-icon"></span>
+                            中西厨
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="餐厅">
+                            <span class="check-icon"></span>
+                            餐厅
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="玄关">
+                            <span class="check-icon"></span>
+                            玄关
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="长辈房">
+                            <span class="check-icon"></span>
+                            长辈房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="长辈卫">
+                            <span class="check-icon"></span>
+                            长辈卫
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="储物间">
+                            <span class="check-icon"></span>
+                            储物间
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="车库">
+                            <span class="check-icon"></span>
+                            车库
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="楼梯">
+                            <span class="check-icon"></span>
+                            楼梯
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="公卫">
+                            <span class="check-icon"></span>
+                            公卫
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="firstFloor" value="洗衣房">
+                            <span class="check-icon"></span>
+                            洗衣房
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 二层静区 -->
+                <div class="input-group">
+                    <label>🛏️ 二层（静区）</label>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px;">
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="主卧套房">
+                            <span class="check-icon"></span>
+                            主卧套房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="主卫">
+                            <span class="check-icon"></span>
+                            主卫
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="衣帽间">
+                            <span class="check-icon"></span>
+                            衣帽间
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="次卧1">
+                            <span class="check-icon"></span>
+                            次卧1
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="次卧2">
+                            <span class="check-icon"></span>
+                            次卧2
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="公卫">
+                            <span class="check-icon"></span>
+                            公卫
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="起居室">
+                            <span class="check-icon"></span>
+                            起居室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="书房">
+                            <span class="check-icon"></span>
+                            书房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="阳台">
+                            <span class="check-icon"></span>
+                            阳台
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="secondFloor" value="露台">
+                            <span class="check-icon"></span>
+                            露台
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 三层静区（如有） -->
+                <div class="input-group">
+                    <label>🌙 三层（静区/主人层）</label>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px;">
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="thirdFloor" value="主卧套房">
+                            <span class="check-icon"></span>
+                            主卧套房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="thirdFloor" value="主卫">
+                            <span class="check-icon"></span>
+                            主卫
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="thirdFloor" value="衣帽间">
+                            <span class="check-icon"></span>
+                            衣帽间
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="thirdFloor" value="起居室">
+                            <span class="check-icon"></span>
+                            起居室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="thirdFloor" value="书房">
+                            <span class="check-icon"></span>
+                            书房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="thirdFloor" value="露台花园">
+                            <span class="check-icon"></span>
+                            露台花园
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)" style="justify-content: center; text-align: center; padding: 10px 8px;">
+                            <input type="checkbox" name="thirdFloor" value="阳光房">
+                            <span class="check-icon"></span>
+                            阳光房
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 地下室功能 -->
+                <div class="input-group">
+                    <label>🏛️ 地下室 / 夹层（可多选）</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="影音室">
+                            <span class="check-icon"></span>
+                            影音室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="酒窖">
+                            <span class="check-icon"></span>
+                            酒窖
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="健身房">
+                            <span class="check-icon"></span>
+                            健身房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="棋牌室">
+                            <span class="check-icon"></span>
+                            棋牌室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="SPA">
+                            <span class="check-icon"></span>
+                            SPA/桑拿
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="茶室">
+                            <span class="check-icon"></span>
+                            茶室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="会客厅">
+                            <span class="check-icon"></span>
+                            会客厅
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="收藏室">
+                            <span class="check-icon"></span>
+                            收藏室
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="储物间">
+                            <span class="check-icon"></span>
+                            储物间
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="保姆房">
+                            <span class="check-icon"></span>
+                            保姆房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="洗衣房">
+                            <span class="check-icon"></span>
+                            洗衣房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="basementRoom" value="设备间">
+                            <span class="check-icon"></span>
+                            设备间
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 套房数量 -->
+                <div class="input-group">
+                    <label>需要几个套房？（套房 = 卧室+独立卫生间+衣帽间）</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="suiteCount" value="1">
+                            <span class="check-icon"></span>
+                            1个套房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="suiteCount" value="2">
+                            <span class="check-icon"></span>
+                            2个套房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="suiteCount" value="3">
+                            <span class="check-icon"></span>
+                            3个套房
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="suiteCount" value="4+">
+                            <span class="check-icon"></span>
+                            4个及以上
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 机电设备需求 -->
+                <div class="input-group">
+                    <label>⚙️ 机电设备需求</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="special" value="电梯">
+                            <span class="check-icon"></span>
+                            家用电梯
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="special" value="游泳池">
+                            <span class="check-icon"></span>
+                            室内泳池
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="special" value="智能">
+                            <span class="check-icon"></span>
+                            智能家居
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="special" value="地暖">
+                            <span class="check-icon"></span>
+                            地暖系统
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="special" value="中央空调">
+                            <span class="check-icon"></span>
+                            中央空调
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="special" value="新风">
+                            <span class="check-icon"></span>
+                            新风系统
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="special" value="锦鲤鱼池">
+                            <span class="check-icon"></span>
+                            🐟 锦鲤鱼池
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>👨‍👩‍👧‍👦 家庭成员情况</label>
+                    <textarea placeholder="请描述常住人口、年龄结构、是否有老人/小孩/宠物等..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- 新增：现在居住痛点 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #e74c3c, #e67e22); color: #fff;">💢</div>
+                <h3>四-1、现在居住的不便 / 装修痛点</h3>
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <label>现在居住有哪些不便？（可多选）</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="收纳不足">
+                            <span class="check-icon"></span>
+                            收纳空间不足
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="动线混乱">
+                            <span class="check-icon"></span>
+                            动线规划混乱
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="采光差">
+                            <span class="check-icon"></span>
+                            采光通风差
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="隔音差">
+                            <span class="check-icon"></span>
+                            隔音效果差
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="漏水">
+                            <span class="check-icon"></span>
+                            漏水/潮湿问题
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="层高低">
+                            <span class="check-icon"></span>
+                            层高不够压抑
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="格局差">
+                            <span class="check-icon"></span>
+                            格局不满意
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="风格过时">
+                            <span class="check-icon"></span>
+                            风格过时老旧
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="painPoints" value="无">
+                            <span class="check-icon"></span>
+                            暂无问题
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>上次装修有哪些遗憾或痛点？</label>
+                    <textarea placeholder="如：插座不够用、衣柜深度不够、灯光设计不合理、储物空间规划失误、选材品质差..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>这次装修最想解决什么问题？</label>
+                    <textarea placeholder="如：想要更多的储物空间、一定要做中西厨、客厅要大而通透、主卧要有独立书房..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第五部分：预算与工期 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff;">💰</div>
+                <h3>五、预算与期望</h3>
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <label>拎包入住单平米造价</label>
+                    <div class="budget-options">
+                        <div class="budget-item" onclick="selectBudget(this)">
+                            <div class="amount">3500元/㎡</div>
+                        </div>
+                        <div class="budget-item" onclick="selectBudget(this)">
+                            <div class="amount">4500元/㎡</div>
+                        </div>
+                        <div class="budget-item" onclick="selectBudget(this)">
+                            <div class="amount">8000元/㎡</div>
+                        </div>
+                        <div class="budget-item" onclick="selectBudget(this)">
+                            <div class="amount">10000+元/㎡</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>设计费预算</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="designBudget" value="50-100">
+                            <span class="check-icon"></span>
+                            50-100元/㎡
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="designBudget" value="100-200">
+                            <span class="check-icon"></span>
+                            100-200元/㎡
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="designBudget" value="200-300">
+                            <span class="check-icon"></span>
+                            200-300元/㎡
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="designBudget" value="300+">
+                            <span class="check-icon"></span>
+                            300+元/㎡
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>期望入住时间</label>
+                    <input type="text" placeholder="如：预计明年6月前入住" style="background: #fff;">
+                </div>
+
+                <div class="input-group">
+                    <label>最看重的设计要点（按优先级填写）</label>
+                    <div class="priority-tags">
+                        <div class="priority-tag" onclick="togglePriority(this)">① 最重要</div>
+                        <div class="priority-tag" onclick="togglePriority(this)">② 次重要</div>
+                        <div class="priority-tag" onclick="togglePriority(this)">③ 第三重要</div>
+                    </div>
+                    <input type="text" placeholder="请填写您最看重的设计要点，如：采光、储物、风格..." style="background: #fff; margin-top: 10px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 第六部分：其他需求 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #666;">📝</div>
+                <h3>六、其他补充</h3>
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <label>特别的生活习惯或需求</label>
+                    <textarea placeholder="如：经常在家办公需要独立书房、收藏艺术品需要展示空间..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>采光、通风、景观特殊要求</label>
+                    <textarea placeholder="如：希望客厅朝南、喜欢大落地窗、要有花园景观..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>不喜欢的风格或元素</label>
+                    <textarea placeholder="如：不喜欢暗色调、不想要过多繁复装饰..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>您是从哪里了解到我们的？（选填）</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="source" value="朋友推荐">
+                            <span class="check-icon"></span>
+                            朋友推荐
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="source" value="小红书">
+                            <span class="check-icon"></span>
+                            小红书
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="source" value="抖音">
+                            <span class="check-icon"></span>
+                            抖音
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="source" value="微信">
+                            <span class="check-icon"></span>
+                            微信
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="source" value="楼盘">
+                            <span class="check-icon"></span>
+                            楼盘活动
+                        </label>
+                        <label class="checkbox-item" onclick="toggleCheck(this)">
+                            <input type="checkbox" name="source" value="其他">
+                            <span class="check-icon"></span>
+                            其他
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 品牌页脚 -->
+        <div class="brand-footer">
+            <strong>DC</strong> 鼎诚别墅设计 · 全案设计 · 施工落地<br>
+            让家更有温度
+        </div>
+
+        <div style="height: 80px;"></div>
+    </div>
+
+    <!-- 固定底部提交按钮 -->
+    <div class="submit-btn">
+        <button onclick="submitAndShare()">📱 提交需求 → 微信发送</button>
+    </div>
+
+    <script>
+        // 多选框
+        function toggleCheck(el) {
+            el.classList.toggle('selected');
+            const input = el.querySelector('input');
+            if (input) input.checked = !input.checked;
+        }
+
+        // 预算单选
+        function selectBudget(el) {
+            document.querySelectorAll('.budget-item').forEach(item => item.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        // 优先级选择
+        function togglePriority(el) {
+            el.classList.toggle('selected');
+        }
+
+        // 获取所有选中的多选值
+        function getCheckedValues(name) {
+            const checked = [];
+            document.querySelectorAll(`input[name="${name}"]:checked`).forEach(input => {
+                checked.push(input.value);
+            });
+            // 也从视觉选中但input未勾选的元素中取（兼容视觉类）
+            document.querySelectorAll(`.checkbox-item.selected input[name="${name}"]`).forEach(input => {
+                if (!checked.includes(input.value)) checked.push(input.value);
+            });
+            return checked;
+        }
+
+        // 提交并分享到微信
+        function submitAndShare() {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            if (!name || !phone) {
+                alert('请填写姓名和联系电话');
+                return;
+            }
+
+            // 收集所有数据
+            const houseTypes = getCheckedValues('houseType');
+            const area = document.getElementById('areaValue').textContent;
+            const floors = getCheckedValues('floor');
+            const basements = getCheckedValues('basement');
+            const gardenArea = document.querySelector('input[placeholder*="约"]').value;
+            const styles = getCheckedValues('style');
+            const firstFloor = getCheckedValues('firstFloor');
+            const secondFloor = getCheckedValues('secondFloor');
+            const thirdFloor = getCheckedValues('thirdFloor');
+            const suiteCount = getCheckedValues('suiteCount');
+            const basementRoom = getCheckedValues('basementRoom');
+            const specials = getCheckedValues('special');
+            const family = document.querySelector('textarea[placeholder*="常住"]').value;
+            const painPoints = getCheckedValues('painPoints');
+            const regrets = document.querySelector('textarea[placeholder*="遗憾"]').value;
+            const solutions = document.querySelector('textarea[placeholder*="解决"]').value;
+            const budgetItem = document.querySelector('.budget-item.selected .amount');
+            const budget = budgetItem ? budgetItem.textContent : '未选择';
+            const designBudget = getCheckedValues('designBudget');
+            const moveIn = document.querySelector('input[placeholder*="入住"]').value;
+            const priorities = document.querySelector('input[placeholder*="设计要点"]').value;
+            const habits = document.querySelector('textarea[placeholder*="办公"]').value;
+            const lightReq = document.querySelector('textarea[placeholder*="朝南"]').value;
+            const dislikes = document.querySelector('textarea[placeholder*="暗色调"]').value;
+            const sources = getCheckedValues('source');
+            const location = document.querySelector('input[placeholder*="小区"]').value;
+            const wechat = document.querySelector('input[placeholder*="微信"]').value;
+
+            // 构建格式化消息
+            let msg = `🏠 【鼎诚别墅设计】客户需求单\n`;
+            msg += `━━━━━━━━━━━━━━━━\n\n`;
+            msg += `📋 基本信息\n`;
+            msg += `姓名：${name}\n`;
+            msg += `电话：${phone}\n`;
+            if (location) msg += `小区：${location}\n`;
+            if (wechat) msg += `微信：${wechat}\n`;
+            msg += `\n🏡 房屋情况\n`;
+            msg += `别墅类型：${houseTypes.length ? houseTypes.join('、') : '未选择'}\n`;
+            msg += `建筑面积：约${area}㎡\n`;
+            msg += `楼层：${floors.length ? floors.join('、') : '未选择'}\n`;
+            msg += `地下室：${basements.length ? basements.join('、') : '未选择'}\n`;
+            if (gardenArea) msg += `庭院/花园：${gardenArea}\n`;
+            msg += `\n🎨 风格偏好\n`;
+            msg += `喜欢的风格：${styles.length ? styles.join('、') : '未选择'}\n`;
+            msg += `\n🛋️ 空间功能\n`;
+            msg += `一层（公区）：${firstFloor.length ? firstFloor.join('、') : '未选择'}\n`;
+            msg += `二层（静区）：${secondFloor.length ? secondFloor.join('、') : '未选择'}\n`;
+            msg += `三层（静区）：${thirdFloor.length ? thirdFloor.join('、') : '未选择'}\n`;
+            msg += `套房数量：${suiteCount.length ? suiteCount.join('、') : '未选择'}\n`;
+            msg += `地下室/夹层：${basementRoom.length ? basementRoom.join('、') : '未选择'}\n`;
+            msg += `特殊功能：${specials.length ? specials.join('、') : '无'}\n`;
+            if (family) msg += `家庭成员：${family}\n`;
+            msg += `\n💢 居住痛点\n`;
+            msg += `不便之处：${painPoints.length ? painPoints.join('、') : '无'}\n`;
+            if (regrets) msg += `装修遗憾：${regrets}\n`;
+            if (solutions) msg += `最想解决：${solutions}\n`;
+            msg += `\n💰 预算与期望\n`;
+            msg += `拎包入住：${budget}/㎡\n`;
+            msg += `设计费：${designBudget.length ? designBudget.join('、') + '元/㎡' : '未选择'}\n`;
+            if (moveIn) msg += `入住时间：${moveIn}\n`;
+            if (priorities) msg += `设计重点：${priorities}\n`;
+            msg += `\n📝 补充说明\n`;
+            if (habits) msg += `生活习惯：${habits}\n`;
+            if (lightReq) msg += `采光/景观：${lightReq}\n`;
+            if (dislikes) msg += `不喜欢：${dislikes}\n`;
+            if (sources.length) msg += `来源渠道：${sources.join('、')}\n`;
+            msg += `\n━━━━━━━━━━━━━━━━\n`;
+            msg += `👆 以上信息由客户自主填写`;
+
+            // 复制到剪贴板
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(msg).then(() => {
+                    alert('✅ 需求已复制到剪贴板！\n\n请打开微信，粘贴发送给设计师。');
+                }).catch(() => {
+                    // fallback
+                    fallbackCopy(msg);
+                });
+            } else {
+                fallbackCopy(msg);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                alert('✅ 需求已复制到剪贴板！\n\n请打开微信，粘贴发送给设计师。');
+            } catch (err) {
+                alert('复制失败，请手动复制内容：\n\n' + text.substring(0, 500) + '...');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // 文件上传提示
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                const msg = `已选择 ${e.target.files.length} 张图片，将随表单一起提交`;
+                const p = this.closest('.upload-area').querySelector('p');
+                p.textContent = `已选择 ${e.target.files.length} 张图片 ✓`;
+                p.style.color = '#11998e';
+            }
+        });
+    </script>
+</body>
+</html>
