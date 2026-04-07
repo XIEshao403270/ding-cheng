@@ -1414,43 +1414,29 @@
     </div>
 
     <script>
-        // 页面加载完成后初始化事件绑定
-        document.addEventListener('DOMContentLoaded', function() {
-            // 为所有 checkbox-item 绑定点击事件
-            document.querySelectorAll('.checkbox-item').forEach(function(item) {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    toggleCheck(this);
-                });
-            });
-        });
-
-        // 多选框
+        // 多选框 - 简化的点击处理
         function toggleCheck(el) {
-            const wasSelected = el.classList.contains('selected');
+            var isSelected = el.classList.contains('selected');
             el.classList.toggle('selected');
-            const input = el.querySelector('input');
+            var input = el.querySelector('input[type="checkbox"]');
             if (input) {
-                input.checked = !wasSelected;
+                input.checked = !isSelected;
             }
         }
 
         // 预算单选
-        document.querySelectorAll('.budget-item').forEach(function(item) {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.budget-item').forEach(function(i) {
-                    i.classList.remove('selected');
-                });
-                this.classList.add('selected');
-            });
-        });
+        function selectBudget(el) {
+            var items = document.querySelectorAll('.budget-item');
+            for (var i = 0; i < items.length; i++) {
+                items[i].classList.remove('selected');
+            }
+            el.classList.add('selected');
+        }
 
         // 优先级选择
-        document.querySelectorAll('.priority-tag').forEach(function(tag) {
-            tag.addEventListener('click', function() {
-                this.classList.toggle('selected');
-            });
-        });
+        function togglePriority(el) {
+            el.classList.toggle('selected');
+        }
 
         // 获取所有选中的多选值
         function getCheckedValues(name) {

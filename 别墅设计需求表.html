@@ -1414,16 +1414,22 @@
     </div>
 
     <script>
-        // 多选框
+        // 多选框 - 简化的点击处理
         function toggleCheck(el) {
+            var isSelected = el.classList.contains('selected');
             el.classList.toggle('selected');
-            const input = el.querySelector('input');
-            if (input) input.checked = !input.checked;
+            var input = el.querySelector('input[type="checkbox"]');
+            if (input) {
+                input.checked = !isSelected;
+            }
         }
 
         // 预算单选
         function selectBudget(el) {
-            document.querySelectorAll('.budget-item').forEach(item => item.classList.remove('selected'));
+            var items = document.querySelectorAll('.budget-item');
+            for (var i = 0; i < items.length; i++) {
+                items[i].classList.remove('selected');
+            }
             el.classList.add('selected');
         }
 
