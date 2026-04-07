@@ -13,29 +13,29 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
             background: #f5f7fa;
             color: #333;
             line-height: 1.6;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
         }
         
         /* 头部 */
         .header {
             background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
             color: white;
-            padding: 40px 20px 30px;
+            padding: 45px 20px 30px;
             text-align: center;
         }
         
         .header h1 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .header p {
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.9;
         }
         
@@ -46,8 +46,8 @@
             margin: 0 auto;
         }
         
-        /* 表单区块 */
-        .form-section {
+        /* 卡片区块 */
+        .card {
             background: white;
             border-radius: 12px;
             padding: 20px;
@@ -55,22 +55,30 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
         
-        .section-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #0066cc;
-            margin-bottom: 16px;
+        .card-header {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
         }
         
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 18px;
-            background: #0066cc;
-            border-radius: 2px;
+        .card-header .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .card-header h3 {
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
         }
         
         /* 输入框 */
@@ -84,9 +92,10 @@
         
         .input-label {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 8px;
+            color: #555;
+            margin-bottom: 10px;
             display: block;
+            font-weight: 500;
         }
         
         .input-label .required {
@@ -98,7 +107,7 @@
             padding: 14px 16px;
             border: 1.5px solid #e8e8e8;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.2s;
             background: #fafafa;
         }
@@ -110,7 +119,13 @@
             box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
         }
         
-        /* 选项卡片 - 麦客风格 */
+        textarea.input-field {
+            resize: vertical;
+            min-height: 90px;
+            font-family: inherit;
+        }
+        
+        /* 选项网格 */
         .option-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -125,17 +140,22 @@
             grid-template-columns: repeat(4, 1fr);
         }
         
+        /* 选项标签 - 麦客风格 */
         .option-item {
-            padding: 12px 10px;
+            padding: 12px 8px;
             border: 1.5px solid #e8e8e8;
             border-radius: 8px;
             text-align: center;
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: #555;
             background: #fafafa;
             cursor: pointer;
             transition: all 0.2s;
             user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
         
         .option-item:active {
@@ -149,7 +169,26 @@
             font-weight: 500;
         }
         
-        /* 单选选项 */
+        .option-item .check-icon {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            font-size: 10px;
+        }
+        
+        .option-item.selected .check-icon {
+            background: #0066cc;
+            border-color: #0066cc;
+            color: white;
+        }
+        
+        /* 单选项 */
         .radio-item {
             padding: 14px 16px;
             border: 1.5px solid #e8e8e8;
@@ -163,12 +202,12 @@
             background: #fafafa;
         }
         
-        .radio-item:last-child {
-            margin-bottom: 0;
-        }
-        
         .radio-item:active {
             transform: scale(0.99);
+        }
+        
+        .radio-item:last-child {
+            margin-bottom: 0;
         }
         
         .radio-item.selected {
@@ -214,10 +253,10 @@
         
         .slider-value {
             text-align: center;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 600;
             color: #0066cc;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
         
         .slider-value span {
@@ -237,44 +276,89 @@
         
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             background: white;
             border: 3px solid #0066cc;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         
         .slider-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 8px;
-            font-size: 12px;
+            margin-top: 10px;
+            font-size: 11px;
             color: #999;
         }
         
-        /* 文本域 */
-        .textarea-field {
-            width: 100%;
-            padding: 14px 16px;
+        /* 预算选项 */
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .budget-item {
+            padding: 16px 12px;
+            text-align: center;
+            border-radius: 10px;
             border: 1.5px solid #e8e8e8;
-            border-radius: 8px;
-            font-size: 15px;
-            resize: vertical;
-            min-height: 100px;
-            font-family: inherit;
+            cursor: pointer;
             transition: all 0.2s;
             background: #fafafa;
         }
         
-        .textarea-field:focus {
-            outline: none;
-            border-color: #0066cc;
-            background: white;
+        .budget-item:active {
+            transform: scale(0.98);
         }
         
-        /* 图片上传 */
+        .budget-item.selected {
+            border-color: #0066cc;
+            background: #e6f0ff;
+        }
+        
+        .budget-item .amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .budget-item.selected .amount {
+            color: #0066cc;
+        }
+        
+        /* 优先级标签 */
+        .priority-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .priority-tag {
+            flex: 1;
+            padding: 10px 8px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1.5px solid #e8e8e8;
+            background: #fafafa;
+        }
+        
+        .priority-tag:active {
+            transform: scale(0.97);
+        }
+        
+        .priority-tag.selected {
+            border-color: #0066cc;
+            background: #0066cc;
+            color: white;
+        }
+        
+        /* 上传区域 */
         .upload-area {
             border: 2px dashed #ddd;
             border-radius: 12px;
@@ -310,6 +394,11 @@
             margin-top: 6px;
         }
         
+        /* 隐藏文件输入 */
+        .hidden-input {
+            display: none;
+        }
+        
         /* 提交按钮 */
         .submit-btn {
             position: fixed;
@@ -340,9 +429,12 @@
             opacity: 0.9;
         }
         
-        /* 隐藏的文件输入 */
-        .hidden-input {
-            display: none;
+        /* 区块标题 */
+        .section-subtitle {
+            font-size: 13px;
+            color: #888;
+            margin: 16px 0 12px;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -354,45 +446,58 @@
     
     <div class="form-container">
         <!-- 基本信息 -->
-        <div class="form-section">
-            <div class="section-title">基本信息</div>
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #0066cc, #0052a3);">📋</div>
+                <h3>一、基本信息</h3>
+            </div>
             
             <div class="input-group">
-                <label class="input-label">
-                    姓名 <span class="required">*</span>
-                </label>
+                <label class="input-label">姓名 <span class="required">*</span></label>
                 <input type="text" class="input-field" id="name" placeholder="请输入您的姓名">
             </div>
             
             <div class="input-group">
-                <label class="input-label">
-                    联系电话 <span class="required">*</span>
-                </label>
+                <label class="input-label">联系电话 <span class="required">*</span></label>
                 <input type="tel" class="input-field" id="phone" placeholder="请输入手机号码">
             </div>
             
             <div class="input-group">
                 <label class="input-label">小区名称</label>
-                <input type="text" class="input-field" id="location" placeholder="请输入小区名称（选填）">
+                <input type="text" class="input-field" id="location" placeholder="请输入小区或楼盘名称">
             </div>
             
             <div class="input-group">
-                <label class="input-label">微信号</label>
-                <input type="text" class="input-field" id="wechat" placeholder="方便设计师联系您（选填）">
+                <label class="input-label">微信号（选填）</label>
+                <input type="text" class="input-field" id="wechat" placeholder="方便设计师及时联系您">
             </div>
         </div>
         
         <!-- 房屋情况 -->
-        <div class="form-section">
-            <div class="section-title">房屋情况</div>
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #d4a853, #c4943f);">🏡</div>
+                <h3>二、房屋情况</h3>
+            </div>
             
             <div class="input-group">
                 <label class="input-label">别墅类型</label>
                 <div class="option-grid">
-                    <div class="option-item" onclick="toggleSelect(this)">独栋别墅</div>
-                    <div class="option-item" onclick="toggleSelect(this)">联排别墅</div>
-                    <div class="option-item" onclick="toggleSelect(this)">双拼别墅</div>
-                    <div class="option-item" onclick="toggleSelect(this)">叠加别墅</div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>独栋别墅
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>联排别墅
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>双拼别墅
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>叠拼别墅
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>合院别墅
+                    </div>
                 </div>
             </div>
             
@@ -400,10 +505,11 @@
                 <label class="input-label">建筑面积</label>
                 <div class="slider-container">
                     <div class="slider-value"><span id="areaValue">300</span> <span>㎡</span></div>
-                    <input type="range" class="slider" id="areaSlider" min="200" max="1000" value="300" step="50">
+                    <input type="range" class="slider" id="areaSlider" min="150" max="1000" value="300" step="10">
                     <div class="slider-labels">
-                        <span>200㎡</span>
-                        <span>1000㎡</span>
+                        <span>150㎡</span>
+                        <span>500㎡</span>
+                        <span>1000㎡+</span>
                     </div>
                 </div>
             </div>
@@ -411,152 +517,93 @@
             <div class="input-group">
                 <label class="input-label">楼层数量</label>
                 <div class="option-grid cols-4">
-                    <div class="option-item" onclick="toggleSelect(this)">2层</div>
-                    <div class="option-item" onclick="toggleSelect(this)">3层</div>
-                    <div class="option-item" onclick="toggleSelect(this)">4层</div>
-                    <div class="option-item" onclick="toggleSelect(this)">5层+</div>
+                    <div class="option-item" onclick="toggleSelect(this)">单层</div>
+                    <div class="option-item" onclick="toggleSelect(this)">两层</div>
+                    <div class="option-item" onclick="toggleSelect(this)">三层</div>
+                    <div class="option-item" onclick="toggleSelect(this)">四层+</div>
                 </div>
             </div>
             
             <div class="input-group">
                 <label class="input-label">地下室</label>
                 <div class="option-grid">
-                    <div class="option-item" onclick="toggleSelect(this)">无地下室</div>
-                    <div class="option-item" onclick="toggleSelect(this)">半地下室</div>
-                    <div class="option-item" onclick="toggleSelect(this)">全地下室</div>
-                    <div class="option-item" onclick="toggleSelect(this)">下沉庭院</div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>无地下室
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>半地下室
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>全地下室
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>下沉庭院
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- 风格偏好 -->
-        <div class="form-section">
-            <div class="section-title">风格偏好</div>
             
-            <div class="option-grid">
-                <div class="option-item" onclick="toggleSelect(this)">现代简约</div>
-                <div class="option-item" onclick="toggleSelect(this)">法式轻奢</div>
-                <div class="option-item" onclick="toggleSelect(this)">意式极简</div>
-                <div class="option-item" onclick="toggleSelect(this)">美式风格</div>
-                <div class="option-item" onclick="toggleSelect(this)">新中式</div>
-                <div class="option-item" onclick="toggleSelect(this)">欧式古典</div>
-                <div class="option-item" onclick="toggleSelect(this)">日式侘寂</div>
-                <div class="option-item" onclick="toggleSelect(this)">其他风格</div>
+            <div class="input-group">
+                <label class="input-label">庭院/花园面积（选填）</label>
+                <input type="text" class="input-field" id="gardenArea" placeholder="如：约200㎡">
             </div>
         </div>
         
-        <!-- 空间功能 -->
-        <div class="form-section">
-            <div class="section-title">空间功能需求</div>
+        <!-- 设计风格 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">🎨</div>
+                <h3>三、设计风格偏好</h3>
+            </div>
             
             <div class="input-group">
-                <label class="input-label">一层（公区）</label>
+                <label class="input-label">喜欢的风格（可多选）</label>
                 <div class="option-grid">
-                    <div class="option-item" onclick="toggleSelect(this)">客厅挑空</div>
-                    <div class="option-item" onclick="toggleSelect(this)">中西厨房</div>
-                    <div class="option-item" onclick="toggleSelect(this)">餐厅分离</div>
-                    <div class="option-item" onclick="toggleSelect(this)">老人房</div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🍰 奶油风
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>⚪ 极简风
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🌿 北欧风
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>✨ 轻奢风
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🏛️ 法式风
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🎋 侘寂风
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🔲 现代风
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🏮 新中式
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🏯 日式
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🌾 美式乡村
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🏭 工业风
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>🇮🇹 意式风格
+                    </div>
                 </div>
             </div>
             
             <div class="input-group">
-                <label class="input-label">套房需求</label>
-                <div class="option-grid cols-4">
-                    <div class="option-item" onclick="toggleSelect(this)">2间</div>
-                    <div class="option-item" onclick="toggleSelect(this)">3间</div>
-                    <div class="option-item" onclick="toggleSelect(this)">4间</div>
-                    <div class="option-item" onclick="toggleSelect(this)">5间+</div>
-                </div>
+                <label class="input-label">补充说明或参考（选填）</label>
+                <textarea class="input-field" id="styleNote" placeholder="可以描述您喜欢的颜色、材质、氛围..."></textarea>
             </div>
             
             <div class="input-group">
-                <label class="input-label">特殊功能区</label>
-                <div class="option-grid">
-                    <div class="option-item" onclick="toggleSelect(this)">书房/茶室</div>
-                    <div class="option-item" onclick="toggleSelect(this)">家庭影院</div>
-                    <div class="option-item" onclick="toggleSelect(this)">健身房</div>
-                    <div class="option-item" onclick="toggleSelect(this)">酒窖/藏酒</div>
-                    <div class="option-item" onclick="toggleSelect(this)">SPA/桑拿</div>
-                    <div class="option-item" onclick="toggleSelect(this)">游泳池</div>
-                </div>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">家庭成员</label>
-                <input type="text" class="input-field" id="family" placeholder="如：夫妻+2孩子+老人">
-            </div>
-        </div>
-        
-        <!-- 预算 -->
-        <div class="form-section">
-            <div class="section-title">预算与期望</div>
-            
-            <div class="input-group">
-                <label class="input-label">拎包入住预算</label>
-                <div class="radio-item" onclick="selectOne(this, 'budget')">
-                    <div class="radio-dot"></div>
-                    <div class="radio-text">3000-4000 元/㎡</div>
-                </div>
-                <div class="radio-item" onclick="selectOne(this, 'budget')">
-                    <div class="radio-dot"></div>
-                    <div class="radio-text">4000-6000 元/㎡</div>
-                </div>
-                <div class="radio-item" onclick="selectOne(this, 'budget')">
-                    <div class="radio-dot"></div>
-                    <div class="radio-text">6000-8000 元/㎡</div>
-                </div>
-                <div class="radio-item" onclick="selectOne(this, 'budget')">
-                    <div class="radio-dot"></div>
-                    <div class="radio-text">8000-12000 元/㎡</div>
-                </div>
-                <div class="radio-item" onclick="selectOne(this, 'budget')">
-                    <div class="radio-dot"></div>
-                    <div class="radio-text">12000+ 元/㎡（高端定制）</div>
-                </div>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">设计费预期</label>
-                <div class="option-grid">
-                    <div class="option-item" onclick="toggleSelect(this)">100-150 元/㎡</div>
-                    <div class="option-item" onclick="toggleSelect(this)">150-200 元/㎡</div>
-                    <div class="option-item" onclick="toggleSelect(this)">200-300 元/㎡</div>
-                    <div class="option-item" onclick="toggleSelect(this)">300+ 元/㎡</div>
-                </div>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">计划入住时间</label>
-                <input type="text" class="input-field" id="moveIn" placeholder="预计何时入住？">
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">设计重点</label>
-                <textarea class="textarea-field" id="priorities" placeholder="您最看重的3个设计要点..."></textarea>
-            </div>
-        </div>
-        
-        <!-- 补充 -->
-        <div class="form-section">
-            <div class="section-title">补充说明</div>
-            
-            <div class="input-group">
-                <label class="input-label">生活习惯</label>
-                <textarea class="textarea-field" id="habits" placeholder="如：经常在家办公、需要中西双厨..."></textarea>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">采光/景观需求</label>
-                <textarea class="textarea-field" id="lightReq" placeholder="如：需要大面积落地窗、喜欢朝南卧室..."></textarea>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">不喜欢/禁忌</label>
-                <textarea class="textarea-field" id="dislikes" placeholder="如：不想要暗色调、避免复杂吊顶..."></textarea>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">图片参考（可选）</label>
+                <label class="input-label">上传参考图片（选填）</label>
                 <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
                     <div class="upload-icon">📷</div>
                     <div class="upload-text">点击上传图片</div>
@@ -565,10 +612,259 @@
                 <input type="file" id="fileInput" class="hidden-input" multiple accept="image/*">
             </div>
         </div>
+        
+        <!-- 空间功能 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #11998e, #38ef7d);">🛋️</div>
+                <h3>四、空间功能需求</h3>
+            </div>
+            
+            <div class="section-subtitle">🏠 一层（公区）</div>
+            <div class="option-grid cols-3">
+                <div class="option-item" onclick="toggleSelect(this)">客厅</div>
+                <div class="option-item" onclick="toggleSelect(this)">横厅</div>
+                <div class="option-item" onclick="toggleSelect(this)">茶室</div>
+                <div class="option-item" onclick="toggleSelect(this)">中厨</div>
+                <div class="option-item" onclick="toggleSelect(this)">西厨</div>
+                <div class="option-item" onclick="toggleSelect(this)">中西厨</div>
+                <div class="option-item" onclick="toggleSelect(this)">餐厅</div>
+                <div class="option-item" onclick="toggleSelect(this)">玄关</div>
+                <div class="option-item" onclick="toggleSelect(this)">长辈房</div>
+                <div class="option-item" onclick="toggleSelect(this)">储物间</div>
+                <div class="option-item" onclick="toggleSelect(this)">车库</div>
+                <div class="option-item" onclick="toggleSelect(this)">公卫</div>
+            </div>
+            
+            <div class="section-subtitle">🛏️ 二层（静区）</div>
+            <div class="option-grid cols-3">
+                <div class="option-item" onclick="toggleSelect(this)">主卧套房</div>
+                <div class="option-item" onclick="toggleSelect(this)">主卫</div>
+                <div class="option-item" onclick="toggleSelect(this)">衣帽间</div>
+                <div class="option-item" onclick="toggleSelect(this)">次卧1</div>
+                <div class="option-item" onclick="toggleSelect(this)">次卧2</div>
+                <div class="option-item" onclick="toggleSelect(this)">公卫</div>
+                <div class="option-item" onclick="toggleSelect(this)">起居室</div>
+                <div class="option-item" onclick="toggleSelect(this)">书房</div>
+                <div class="option-item" onclick="toggleSelect(this)">阳台</div>
+            </div>
+            
+            <div class="section-subtitle">🌙 三层（主人层）</div>
+            <div class="option-grid cols-3">
+                <div class="option-item" onclick="toggleSelect(this)">主卧套房</div>
+                <div class="option-item" onclick="toggleSelect(this)">主卫</div>
+                <div class="option-item" onclick="toggleSelect(this)">衣帽间</div>
+                <div class="option-item" onclick="toggleSelect(this)">起居室</div>
+                <div class="option-item" onclick="toggleSelect(this)">书房</div>
+                <div class="option-item" onclick="toggleSelect(this)">露台花园</div>
+                <div class="option-item" onclick="toggleSelect(this)">阳光房</div>
+            </div>
+            
+            <div class="section-subtitle">🏛️ 地下室/夹层</div>
+            <div class="option-grid cols-3">
+                <div class="option-item" onclick="toggleSelect(this)">影音室</div>
+                <div class="option-item" onclick="toggleSelect(this)">酒窖</div>
+                <div class="option-item" onclick="toggleSelect(this)">健身房</div>
+                <div class="option-item" onclick="toggleSelect(this)">棋牌室</div>
+                <div class="option-item" onclick="toggleSelect(this)">SPA/桑拿</div>
+                <div class="option-item" onclick="toggleSelect(this)">茶室</div>
+                <div class="option-item" onclick="toggleSelect(this)">会客厅</div>
+                <div class="option-item" onclick="toggleSelect(this)">收藏室</div>
+                <div class="option-item" onclick="toggleSelect(this)">保姆房</div>
+                <div class="option-item" onclick="toggleSelect(this)">设备间</div>
+            </div>
+            
+            <div class="section-subtitle">🔢 套房数量（卧室+独立卫生间+衣帽间）</div>
+            <div class="option-grid cols-4">
+                <div class="option-item" onclick="toggleSelect(this)">1个</div>
+                <div class="option-item" onclick="toggleSelect(this)">2个</div>
+                <div class="option-item" onclick="toggleSelect(this)">3个</div>
+                <div class="option-item" onclick="toggleSelect(this)">4个+</div>
+            </div>
+            
+            <div class="section-subtitle">⚙️ 机电设备需求</div>
+            <div class="option-grid">
+                <div class="option-item" onclick="toggleSelect(this)">
+                    <span class="check-icon"></span>家用电梯
+                </div>
+                <div class="option-item" onclick="toggleSelect(this)">
+                    <span class="check-icon"></span>室内泳池
+                </div>
+                <div class="option-item" onclick="toggleSelect(this)">
+                    <span class="check-icon"></span>智能家居
+                </div>
+                <div class="option-item" onclick="toggleSelect(this)">
+                    <span class="check-icon"></span>地暖系统
+                </div>
+                <div class="option-item" onclick="toggleSelect(this)">
+                    <span class="check-icon"></span>中央空调
+                </div>
+                <div class="option-item" onclick="toggleSelect(this)">
+                    <span class="check-icon"></span>新风系统
+                </div>
+                <div class="option-item" onclick="toggleSelect(this)">
+                    <span class="check-icon"></span>🐟 锦鲤鱼池
+                </div>
+            </div>
+            
+            <div class="input-group" style="margin-top: 16px;">
+                <label class="input-label">👨‍👩‍👧‍👦 家庭成员情况</label>
+                <textarea class="input-field" id="family" placeholder="请描述常住人口、年龄结构、是否有老人/小孩/宠物等..."></textarea>
+            </div>
+        </div>
+        
+        <!-- 居住痛点 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #e74c3c, #e67e22);">💢</div>
+                <h3>五、居住痛点（现在的不便）</h3>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">现在居住有哪些不便？（可多选）</label>
+                <div class="option-grid">
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>收纳不足
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>动线混乱
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>采光通风差
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>隔音效果差
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>漏水/潮湿
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>层高压抑
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>格局不满意
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>风格过时
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>暂无问题
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">上次装修有哪些遗憾？</label>
+                <textarea class="input-field" id="regrets" placeholder="如：插座不够用、衣柜深度不够、灯光设计不合理..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">这次装修最想解决什么问题？</label>
+                <textarea class="input-field" id="solutions" placeholder="如：想要更多储物空间、一定要做中西厨、客厅要大而通透..."></textarea>
+            </div>
+        </div>
+        
+        <!-- 预算 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">💰</div>
+                <h3>六、预算与期望</h3>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">拎包入住单平米造价</label>
+                <div class="budget-grid">
+                    <div class="budget-item" onclick="selectBudget(this)">
+                        <div class="amount">3500元/㎡</div>
+                    </div>
+                    <div class="budget-item" onclick="selectBudget(this)">
+                        <div class="amount">4500元/㎡</div>
+                    </div>
+                    <div class="budget-item" onclick="selectBudget(this)">
+                        <div class="amount">8000元/㎡</div>
+                    </div>
+                    <div class="budget-item" onclick="selectBudget(this)">
+                        <div class="amount">10000+元/㎡</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">设计费预算</label>
+                <div class="option-grid cols-4">
+                    <div class="option-item" onclick="toggleSelect(this)">50-100元/㎡</div>
+                    <div class="option-item" onclick="toggleSelect(this)">100-200元/㎡</div>
+                    <div class="option-item" onclick="toggleSelect(this)">200-300元/㎡</div>
+                    <div class="option-item" onclick="toggleSelect(this)">300+元/㎡</div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">期望入住时间</label>
+                <input type="text" class="input-field" id="moveIn" placeholder="如：预计明年6月前入住">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">最看重的设计要点（按优先级填写）</label>
+                <div class="priority-tags">
+                    <div class="priority-tag" onclick="togglePriority(this)">① 最重要</div>
+                    <div class="priority-tag" onclick="togglePriority(this)">② 次重要</div>
+                    <div class="priority-tag" onclick="togglePriority(this)">③ 第三重要</div>
+                </div>
+                <input type="text" class="input-field" id="priorities" placeholder="请填写您最看重的设计要点" style="margin-top: 10px;">
+            </div>
+        </div>
+        
+        <!-- 其他补充 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #666;">📝</div>
+                <h3>七、其他补充</h3>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">特别的生活习惯或需求</label>
+                <textarea class="input-field" id="habits" placeholder="如：经常在家办公需要独立书房、收藏艺术品需要展示空间..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">采光、通风、景观特殊要求</label>
+                <textarea class="input-field" id="lightReq" placeholder="如：希望客厅朝南、喜欢大落地窗、要有花园景观..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">不喜欢的风格或元素</label>
+                <textarea class="input-field" id="dislikes" placeholder="如：不喜欢暗色调、不想要过多繁复装饰..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">您是从哪里了解到我们的？（选填）</label>
+                <div class="option-grid">
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>朋友推荐
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>小红书
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>抖音
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>微信
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>楼盘活动
+                    </div>
+                    <div class="option-item" onclick="toggleSelect(this)">
+                        <span class="check-icon"></span>其他
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="submit-btn">
-        <button onclick="submitForm()">提交需求 → 微信发送</button>
+        <button onclick="submitForm()">📱 提交需求 → 微信发送</button>
     </div>
     
     <script>
@@ -577,58 +873,72 @@
             el.classList.toggle('selected');
         }
         
-        // 单选切换（同类互斥）
-        function selectOne(el, group) {
-            // 找出同组的其他元素并取消选中
-            const container = el.closest('.input-group') || el.parentElement;
-            if (container) {
-                container.querySelectorAll('.radio-item').forEach(item => {
-                    item.classList.remove('selected');
-                });
-            }
+        // 预算单选
+        function selectBudget(el) {
+            document.querySelectorAll('.budget-item').forEach(function(item) {
+                item.classList.remove('selected');
+            });
             el.classList.add('selected');
         }
         
+        // 优先级切换
+        function togglePriority(el) {
+            el.classList.toggle('selected');
+        }
+        
         // 面积滑块
-        const areaSlider = document.getElementById('areaSlider');
-        const areaValue = document.getElementById('areaValue');
-        if (areaSlider) {
+        var areaSlider = document.getElementById('areaSlider');
+        var areaValue = document.getElementById('areaValue');
+        if (areaSlider && areaValue) {
             areaSlider.addEventListener('input', function() {
                 areaValue.textContent = this.value;
             });
         }
         
         // 文件上传
-        const fileInput = document.getElementById('fileInput');
-        const uploadArea = document.getElementById('uploadArea');
+        var fileInput = document.getElementById('fileInput');
+        var uploadArea = document.getElementById('uploadArea');
         if (fileInput && uploadArea) {
             fileInput.addEventListener('change', function() {
                 if (this.files.length > 0) {
                     uploadArea.classList.add('has-file');
-                    uploadArea.querySelector('.upload-text').textContent = `已选择 ${this.files.length} 张图片 ✓`;
+                    uploadArea.querySelector('.upload-text').textContent = '已选择 ' + this.files.length + ' 张图片 ✓';
                 }
             });
         }
         
-        // 获取选中的多选项文本
-        function getSelectedTexts(selector) {
-            const selected = [];
-            document.querySelectorAll(selector + '.selected').forEach(el => {
-                selected.push(el.textContent.trim());
+        // 获取选中的选项文本
+        function getSelectedOptions(container) {
+            var selected = [];
+            container.querySelectorAll('.option-item.selected').forEach(function(el) {
+                var text = el.textContent.trim();
+                // 移除图标
+                text = text.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '').trim();
+                if (text) selected.push(text);
             });
             return selected;
         }
         
-        // 获取单选项文本
-        function getSingleSelectedText(containerSelector) {
-            const selected = document.querySelector(containerSelector + ' .radio-item.selected');
-            return selected ? selected.querySelector('.radio-text').textContent.trim() : '未选择';
+        // 获取单选预算
+        function getSelectedBudget() {
+            var selected = document.querySelector('.budget-item.selected');
+            return selected ? selected.querySelector('.amount').textContent : '未选择';
+        }
+        
+        // 获取设计费
+        function getDesignBudget(container) {
+            var selected = [];
+            container.querySelectorAll('.option-item.selected').forEach(function(el) {
+                var text = el.textContent.trim();
+                if (text) selected.push(text);
+            });
+            return selected.length ? selected.join('、') : '未选择';
         }
         
         // 提交表单
         function submitForm() {
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
+            var name = document.getElementById('name').value.trim();
+            var phone = document.getElementById('phone').value.trim();
             
             if (!name) {
                 alert('请输入您的姓名');
@@ -639,65 +949,68 @@
                 return;
             }
             
-            const location = document.getElementById('location').value.trim();
-            const wechat = document.getElementById('wechat').value.trim();
-            const area = areaSlider.value;
+            // 获取所有数据
+            var cards = document.querySelectorAll('.card');
             
-            // 获取选项
-            const houseTypes = getSelectedTexts('.form-section:nth-child(2) .option-grid:first-child .option-item');
-            const floors = getSelectedTexts('.form-section:nth-child(2) .option-grid:nth-child(3) .option-item');
-            const basements = getSelectedTexts('.form-section:nth-child(2) .option-grid:nth-child(4) .option-item');
-            const styles = getSelectedTexts('.form-section:nth-child(3) .option-grid .option-item');
-            const firstFloor = getSelectedTexts('.form-section:nth-child(4) .option-grid:nth-child(1) .option-item');
-            const suites = getSelectedTexts('.form-section:nth-child(4) .option-grid:nth-child(2) .option-item');
-            const specials = getSelectedTexts('.form-section:nth-child(4) .option-grid:nth-child(3) .option-item');
-            const family = document.getElementById('family').value.trim();
+            var location = document.getElementById('location').value.trim();
+            var wechat = document.getElementById('wechat').value.trim();
+            var area = areaSlider.value;
+            var gardenArea = document.getElementById('gardenArea').value.trim();
+            var styleNote = document.getElementById('styleNote').value.trim();
+            var family = document.getElementById('family').value.trim();
+            var regrets = document.getElementById('regrets').value.trim();
+            var solutions = document.getElementById('solutions').value.trim();
+            var budget = getSelectedBudget();
+            var moveIn = document.getElementById('moveIn').value.trim();
+            var priorities = document.getElementById('priorities').value.trim();
+            var habits = document.getElementById('habits').value.trim();
+            var lightReq = document.getElementById('lightReq').value.trim();
+            var dislikes = document.getElementById('dislikes').value.trim();
             
-            const budget = getSingleSelectedText('.form-section:nth-child(5) .input-group:nth-child(1)');
-            const designBudget = getSelectedTexts('.form-section:nth-child(5) .input-group:nth-child(2) .option-grid .option-item');
-            const moveIn = document.getElementById('moveIn').value.trim();
-            const priorities = document.getElementById('priorities').value.trim();
-            const habits = document.getElementById('habits').value.trim();
-            const lightReq = document.getElementById('lightReq').value.trim();
-            const dislikes = document.getElementById('dislikes').value.trim();
+            // 收集各区域选项
+            var houseType = getSelectedOptions(cards[1]);
+            var floors = getSelectedOptions(cards[1]);
+            var basements = getSelectedOptions(cards[1]);
+            var styles = getSelectedOptions(cards[2]);
             
             // 构建消息
-            let msg = `🏠 【鼎诚别墅设计】客户需求单\n`;
-            msg += `━━━━━━━━━━━━━━━━\n\n`;
-            msg += `📋 基本信息\n`;
-            msg += `姓名：${name}\n`;
-            msg += `电话：${phone}\n`;
-            if (location) msg += `小区：${location}\n`;
-            if (wechat) msg += `微信：${wechat}\n`;
-            msg += `\n🏡 房屋情况\n`;
-            msg += `别墅类型：${houseTypes.length ? houseTypes.join('、') : '未选择'}\n`;
-            msg += `建筑面积：约${area}㎡\n`;
-            msg += `楼层：${floors.length ? floors.join('、') : '未选择'}\n`;
-            msg += `地下室：${basements.length ? basements.join('、') : '未选择'}\n`;
-            msg += `\n🎨 风格偏好\n`;
-            msg += `喜欢的风格：${styles.length ? styles.join('、') : '未选择'}\n`;
-            msg += `\n🛋️ 空间功能\n`;
-            msg += `一层（公区）：${firstFloor.length ? firstFloor.join('、') : '未选择'}\n`;
-            msg += `套房数量：${suites.length ? suites.join('、') : '未选择'}\n`;
-            msg += `特殊功能：${specials.length ? specials.join('、') : '无'}\n`;
-            if (family) msg += `家庭成员：${family}\n`;
-            msg += `\n💰 预算与期望\n`;
-            msg += `拎包入住：${budget}\n`;
-            msg += `设计费：${designBudget.length ? designBudget.join('、') + '元/㎡' : '未选择'}\n`;
-            if (moveIn) msg += `入住时间：${moveIn}\n`;
-            if (priorities) msg += `设计重点：${priorities}\n`;
-            msg += `\n📝 补充说明\n`;
-            if (habits) msg += `生活习惯：${habits}\n`;
-            if (lightReq) msg += `采光/景观：${lightReq}\n`;
-            if (dislikes) msg += `不喜欢：${dislikes}\n`;
-            msg += `\n━━━━━━━━━━━━━━━━\n`;
-            msg += `👆 以上信息由客户自主填写`;
+            var msg = '🏠 【鼎诚别墅设计】客户需求单\n';
+            msg += '━━━━━━━━━━━━━━━━\n\n';
+            msg += '📋 基本信息\n';
+            msg += '姓名：' + name + '\n';
+            msg += '电话：' + phone + '\n';
+            if (location) msg += '小区：' + location + '\n';
+            if (wechat) msg += '微信：' + wechat + '\n';
+            msg += '\n🏡 房屋情况\n';
+            msg += '别墅类型：' + (houseType.length ? houseType.join('、') : '未选择') + '\n';
+            msg += '建筑面积：约' + area + '㎡\n';
+            msg += '楼层：' + (floors.length ? floors.join('、') : '未选择') + '\n';
+            msg += '地下室：' + (basements.length ? basements.join('、') : '未选择') + '\n';
+            if (gardenArea) msg += '庭院/花园：' + gardenArea + '\n';
+            msg += '\n🎨 风格偏好\n';
+            msg += '喜欢的风格：' + (styles.length ? styles.join('、') : '未选择') + '\n';
+            if (styleNote) msg += '补充说明：' + styleNote + '\n';
+            msg += '\n🛋️ 空间功能\n';
+            if (family) msg += '家庭成员：' + family + '\n';
+            msg += '\n💢 居住痛点\n';
+            if (regrets) msg += '装修遗憾：' + regrets + '\n';
+            if (solutions) msg += '最想解决：' + solutions + '\n';
+            msg += '\n💰 预算与期望\n';
+            msg += '拎包入住：' + budget + '\n';
+            msg += '入住时间：' + (moveIn || '未填写') + '\n';
+            if (priorities) msg += '设计重点：' + priorities + '\n';
+            msg += '\n📝 补充说明\n';
+            if (habits) msg += '生活习惯：' + habits + '\n';
+            if (lightReq) msg += '采光/景观：' + lightReq + '\n';
+            if (dislikes) msg += '不喜欢：' + dislikes + '\n';
+            msg += '\n━━━━━━━━━━━━━━━━\n';
+            msg += '👆 以上信息由客户自主填写';
             
             // 复制
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(msg).then(() => {
+                navigator.clipboard.writeText(msg).then(function() {
                     alert('✅ 需求已复制到剪贴板！\n\n请打开微信，粘贴发送给设计师。');
-                }).catch(() => {
+                }).catch(function() {
                     fallbackCopy(msg);
                 });
             } else {
@@ -706,7 +1019,7 @@
         }
         
         function fallbackCopy(text) {
-            const textarea = document.createElement('textarea');
+            var textarea = document.createElement('textarea');
             textarea.value = text;
             textarea.style.cssText = 'position:fixed;opacity:0;';
             document.body.appendChild(textarea);
