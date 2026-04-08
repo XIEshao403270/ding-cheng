@@ -196,6 +196,7 @@
 
         /* 图片上传 */
         .upload-area {
+            display: block;
             border: 2px dashed #ddd;
             border-radius: 8px;
             padding: 20px;
@@ -203,10 +204,11 @@
             cursor: pointer;
             transition: all 0.2s;
             background: #fafafa;
+            width: 100%;
         }
         .upload-area:hover { border-color: #c9a84c; background: #fffdf5; }
-        .upload-area .icon { font-size: 28px; margin-bottom: 6px; }
-        .upload-area p { font-size: 12px; color: #999; }
+        .upload-area .icon { font-size: 28px; margin-bottom: 6px; display: block; }
+        .upload-area p { font-size: 12px; color: #999; margin: 0; }
         .upload-area input { display: none; }
         .preview-images { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
         .preview-images img { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; border: 1px solid #eee; }
@@ -258,6 +260,14 @@
         .thanks h2 { font-size:20px; color:#1a1a2e; margin-bottom:10px; }
         .thanks p { font-size:14px; color:#888; line-height:1.8; }
     </style>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // EmailJS 初始化 - Public Key
+        (function() {
+            emailjs.init({ publicKey: "YOUR_PUBLIC_KEY" });
+        })();
+    </script>
 </head>
 <body>
 
@@ -442,11 +452,11 @@
         <div class="question">
             <div class="q-label bold">上传参考图片（喜欢的风格/样板间/杂志截图）</div>
             <div class="q-hint">可上传多张，支持JPG/PNG</div>
-            <div class="upload-area" onclick="document.getElementById('style-img').click()">
+            <label class="upload-area" for="style-img">
                 <div class="icon">🖼️</div>
                 <p>点击上传参考图片</p>
                 <input type="file" id="style-img" multiple accept="image/*" onchange="previewImages(this,'style-preview')">
-            </div>
+            </label>
             <div class="preview-images" id="style-preview"></div>
         </div>
 
@@ -751,11 +761,11 @@
         </div>
         <div class="question" style="margin-top:12px;">
             <div class="q-label bold">上传平面图或现场照片（如有）</div>
-            <div class="upload-area" onclick="document.getElementById('extra-img').click()">
+            <label class="upload-area" for="extra-img">
                 <div class="icon">📐</div>
                 <p>点击上传平面图/现场照片</p>
                 <input type="file" id="extra-img" multiple accept="image/*" onchange="previewImages(this,'extra-preview')">
-            </div>
+            </label>
             <div class="preview-images" id="extra-preview"></div>
         </div>
     </div>
@@ -930,27 +940,63 @@ ${getVal('extra')}
 
     document.getElementById('modal-content').textContent = result;
     document.getElementById('modal').classList.add('show');
+    // 保存需求内容供发邮件使用
+    window._submitResult = result;
+    window._submitName = name;
+    window._submitPhone = phone;
 }
 
-// 复制结果
+// 复制结果 + 发邮件
 function copyResult() {
     const text = document.getElementById('modal-content').textContent;
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(() => {
-            alert('✅ 已复制！粘贴到微信发给设计师即可');
-            closeModal();
-            document.getElementById('thanks').classList.add('show');
-        });
-    } else {
+
+    // 复制到剪贴板
+    function doCopy() {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+        } else {
+            fallbackCopy(text);
+        }
+    }
+    function fallbackCopy(t) {
         const ta = document.createElement('textarea');
-        ta.value = text;
+        ta.value = t;
         document.body.appendChild(ta);
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
-        alert('✅ 已复制！粘贴到微信发给设计师即可');
-        closeModal();
-        document.getElementById('thanks').classList.add('show');
+    }
+
+    doCopy();
+
+    // 发送邮件到 401208886@qq.com
+    sendEmail(text);
+
+    closeModal();
+    document.getElementById('thanks').classList.add('show');
+}
+
+// EmailJS 发送邮件
+function sendEmail(content) {
+    // 检查 EmailJS 是否已配置
+    if (typeof emailjs === 'undefined') return;
+    try {
+        emailjs.send(
+            'service_dingcheng',   // EmailJS Service ID（需配置）
+            'template_dingcheng',  // EmailJS Template ID（需配置）
+            {
+                to_email: '401208886@qq.com',
+                client_name: window._submitName || '未知',
+                client_phone: window._submitPhone || '未知',
+                form_content: content,
+                submit_time: new Date().toLocaleString('zh-CN')
+            }
+        ).then(
+            () => console.log('邮件发送成功'),
+            (err) => console.warn('邮件发送失败:', err)
+        );
+    } catch(e) {
+        console.warn('EmailJS error:', e);
     }
 }
 
